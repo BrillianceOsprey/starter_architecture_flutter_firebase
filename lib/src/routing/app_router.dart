@@ -50,19 +50,19 @@ GoRouter goRouter(GoRouterRef ref) {
       if (!didCompleteOnboarding) {
         // Always check state.subloc before returning a non-null route
         // https://github.com/flutter/packages/blob/main/packages/go_router/example/lib/redirection.dart#L78
-        if (state.location != '/onboarding') {
+        if (state.uri.toString() != '/onboarding') {
           return '/onboarding';
         }
       }
       final isLoggedIn = authRepository.currentUser != null;
       if (isLoggedIn) {
-        if (state.location.startsWith('/signIn')) {
+        if (state.uri.toString().startsWith('/signIn')) {
           return '/jobs';
         }
       } else {
-        if (state.location.startsWith('/jobs') ||
-            state.location.startsWith('/entries') ||
-            state.location.startsWith('/account')) {
+        if (state.uri.toString().startsWith('/jobs') ||
+            state.uri.toString().startsWith('/entries') ||
+            state.uri.toString().startsWith('/account')) {
           return '/signIn';
         }
       }
